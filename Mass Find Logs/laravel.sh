@@ -10,7 +10,7 @@ fi
 
 for SITE in $(cat $LISTS);
 do
-    if [[ $(curl --connect-timeout 3 --max-time 3 -kLs "${SITE}/wp-content/debug.log" ) =~ 'laravel\framework' ]]; then
+    if [[ $(curl --connect-timeout 3 --max-time 3 -kLs "${SITE}/storage/logs/laravel.log" ) =~ 'laravel\framework' ]]; then
 		echo -e "\e[32m[+] FOUND: ${SITE}storage/logs/laravel.log"
 	else
 		echo -e "\e[31m[-] NOT FOUND: ${SITE}"
