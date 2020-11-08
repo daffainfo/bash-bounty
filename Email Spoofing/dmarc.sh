@@ -9,7 +9,7 @@ fi
 
 for SITE in $(cat $LISTS);
 do
-    if [[ $(curl --connect-timeout 3 -kls --max-time 3 -d "action=dm_integration_inspect_dmarc&domain=${SITE}&security=83b182c4ce" -X POST "https://dmarcian.com/wp-admin/admin-ajax.php") =~ 'No DMARC record published.' ]]; then
+    if [[ $(curl --connect-timeout 3 -kls --max-time 3 -X GET "https://dmarcly.com/server/dmarc_check.php?domain=${SITE}") =~ 'success' ]]; then
 		echo -e "\e[32m[+] VULN: ${SITE}"
 	else
 		echo -e "\e[31m[-] NOT VULN: ${SITE}"
