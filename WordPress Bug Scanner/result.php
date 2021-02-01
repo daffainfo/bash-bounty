@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 	$nomer = 1;
 	$input = $_POST['wordpress'];
 	
@@ -10,6 +11,7 @@
 
 	$url4 = $input.'/wp-content/debug.log';
 
+	//Backup file
 	$url5 = $input.'/.wp-config.php.swp';
 	$url6 = $input.'/wp-config.inc';
 	$url7 = $input.'/wp-config.old';
@@ -24,6 +26,7 @@
 	$url16 = $input.'/wp-config.php.txt';
 	$url17 = $input.'/wp-config.php~';
 
+	//xmlrpc
 	$url18 = $input.'/xmlrpc.php';
 
 	$output = file_get_contents($url);
@@ -69,7 +72,7 @@
 			<th>Username Wordpress</th>
 			<tr>
 			<?php
-				for($i=0; $i<count($json); $i++) {
+				for($i=0; $i < count($json); $i++) {
 					echo "<tr>";
 					echo "<td>".$nomer++."</td>";
 				    echo "<td>".$json[$i]["slug"]."</td>";

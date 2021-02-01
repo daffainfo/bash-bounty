@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 $input = $_POST['apikey'];
 
 $url = 'https://maps.googleapis.com/maps/api/staticmap?center=45%2C10&zoom=7&size=400x400&key='.$input;
@@ -42,82 +42,126 @@ function getContents($url) {
 	$data = file_get_contents($url);
 	return $data;
 }
-
-if ($yourProducts[0] == 200) {
-	echo "<p>API key is vulnerable for Staticmap API.</p>";
-	echo $url;
-} else if ($yourProducts[0] == 403) {
-	echo "<p>API key is not vulnerable for Staticmap API.</p>";
-}
-
-if ($yourProducts[1] == 200) {
-	echo "<p>API key is vulnerable for Streetview API.</p>";
-	echo $url2;
-} else if ($yourProducts[1] == 403) {
-	echo "<p>API key is not vulnerable for Streetview API.</p>";
-}
-
-if ($yourProducts[2] == 200) {
-	echo "<p>API key is vulnerable for Embed API.</p>";
-	echo $url3;
-} else if ($yourProducts[2] == 403) {
-	echo "<p>API key is not vulnerable for Embed API.</p>";
-}
-
-if (strpos($yourProducts1[0], 'REQUEST_DENIED' === false)) {
-	echo "<p>API key is vulnerable for Directions API.</p>";
-	echo $url4;
-} else if ($yourProducts[3] == 200) {
-	echo "<p>API key is not vulnerable for Directions API.</p>";
-}
-
-if (strpos($yourProducts1[1], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Geocoding API.</p>";
-	echo $url5;
-} else if ($yourProducts[4] == 200) {
-	echo "<p>API key is not vulnerable for Geocoding API.</p>";
-}
-
-if (strpos($yourProducts1[2], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Distance Matrix API.</p>";
-	echo $url6;
-} else if ($yourProducts[5] == 200) {
-	echo "<p>API key is not vulnerable for Distance Matrix API.</p>";
-}
-
-if (strpos($yourProducts1[3], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Find Place from Text API.</p>";
-	echo $url7;
-} else if ($yourProducts[6] == 200) {
-	echo "<p>API key is not vulnerable for Find Place from Text API.</p>";
-}
-
-if (strpos($yourProducts1[4], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Autocomplete API.</p>";
-	echo $url8;
-} else if ($yourProducts[7] == 200) {
-	echo "<p>API key is not vulnerable for Autocomplete API.</p>";
-}
-
-if (strpos($yourProducts1[5], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Elevation API.</p>";
-	echo $url9;
-} else if ($yourProducts[8] == 200) {
-	echo "<p>API key is not vulnerable for Elevation API.</p>";
-}
-
-if (strpos($yourProducts1[5], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Timezone API.</p>";
-	echo $url10;
-} else if ($yourProducts[9] == 200) {
-	echo "<p>API key is not vulnerable for Timezone API.</p>";
-}
-
-if (strpos($yourProducts1[6], 'REQUEST_DENIED') === false) {
-	echo "<p>API key is vulnerable for Roads API.</p>";
-	echo $url11;
-} else if (strpos($yourProducts[10], '403') === false) {
-	echo "<p>API key is not vulnerable for Roads API.</p>";
-}
-
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Result Google Map API Key</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		a {
+			font-size: 1.25em;
+		}
+		h1 {
+			margin: 25px 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+	<h1 class="text-center">Results</h1>
+	<h5>Staticmap API</h5>
+	<?php 
+		if ($yourProducts[0] == 200) {
+			echo "<p>API key is vulnerable for Staticmap API</p>";
+			echo "<a href='".$url."' target='_blank'>Staticmap API</a>";
+		} else if ($yourProducts[0] == 403) {
+			echo "<p>API key is not vulnerable for Staticmap API</p>";
+		}
+	?>
+	<h5>Streetview API</h5>
+	<?php
+		if ($yourProducts[1] == 200) {
+			echo "<p>API key is vulnerable for Streetview API</p>";
+			echo "<a href='".$url2."' target='_blank'>Streetview API</a>";
+		} else if ($yourProducts[1] == 403) {
+			echo "<p>API key is not vulnerable for Streetview API</p>";
+		}
+	?>
+	<h5>Embed API</h5>
+	<?php
+		if ($yourProducts[2] == 200) {
+			echo "<p>API key is vulnerable for Embed API</p>";
+			echo "<a href='".$url3."' target='_blank'>Embed API</a>";
+		} else if ($yourProducts[2] == 403) {
+			echo "<p>API key is not vulnerable for Embed API</p>";
+		}
+	?>
+	<h5>Directions API</h5>
+	<?php
+		if (strpos($yourProducts1[0], 'REQUEST_DENIED' === false)) {
+			echo "<p>API key is vulnerable for Directions API</p>";
+			echo "<a href='".$url4."' target='_blank'>Directions API</a>";
+		} else if ($yourProducts[3] == 200) {
+			echo "<p>API key is not vulnerable for Directions API</p>";
+		}
+	?>
+	<h5>Geocoding API</h5>
+	<?php
+		if (strpos($yourProducts1[1], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Geocoding API</p>";
+			echo "<a href='".$url5."' target='_blank'>Geocoding API</a>";
+		} else if ($yourProducts[4] == 200) {
+			echo "<p>API key is not vulnerable for Geocoding API</p>";
+		}
+	?>
+	<h5>Matrix API</h5>
+	<?php
+		if (strpos($yourProducts1[2], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Matrix API</p>";
+			echo "<a href='".$url6."' target='_blank'>Matrix API</a>";
+		} else if ($yourProducts[5] == 200) {
+			echo "<p>API key is not vulnerable for Matrix API</p>";
+		}
+	?>
+	<h5>Find Place from Text API</h5>
+	<?php
+		if (strpos($yourProducts1[3], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Find Place from Text API</p>";
+			echo "<a href='".$url7."' target='_blank'>Find Place from Text API</a>";
+		} else if ($yourProducts[6] == 200) {
+			echo "<p>API key is not vulnerable for Find Place from Text API</p>";
+		}
+	?>
+	<h5>Autocomplete API</h5>
+	<?php
+		if (strpos($yourProducts1[4], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Autocomplete API</p>";
+			echo "<a href='".$url8."' target='_blank'>Autocomplete API</a>";
+		} else if ($yourProducts[7] == 200) {
+			echo "<p>API key is not vulnerable for Autocomplete API</p>";
+		}
+	?>
+	<h5>Elevation API</h5>
+	<?php
+		if (strpos($yourProducts1[4], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Elevation API</p>";
+			echo "<a href='".$url9."' target='_blank'>Elevation API</a>";
+		} else if ($yourProducts[7] == 200) {
+			echo "<p>API key is not vulnerable for Elevation API</p>";
+		}
+	?>
+	<h5>Timezone API</h5>
+	<?php
+		if (strpos($yourProducts1[5], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Timezone API</p>";
+			echo "<a href='".$url10."' target='_blank'>Timezone API</a>";
+		} else if ($yourProducts[9] == 200) {
+			echo "<p>API key is not vulnerable for Timezone API</p>";
+		}
+	?>
+	<h5>Roads API</h5>
+	<?php
+		if (strpos($yourProducts1[6], 'REQUEST_DENIED') === false) {
+			echo "<p>API key is vulnerable for Roads API</p>";
+			echo "<a href='".$url11."' target='_blank'>Roads API</a>";
+		} else if (strpos($yourProducts[10], '403') === false) {
+			echo "<p>API key is not vulnerable for Roads API</p>";
+		}
+	?>
+</body>
+</html>

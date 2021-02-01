@@ -1,5 +1,5 @@
 #!/bin/bash
-# Log Zend Mass Scanner 
+# Find Zend Configuration File Mass Scanner 
 LISTS=$1
 
 if [[ ! -f ${LISTS} ]]; then

@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 $input = $_POST['website'];
 
 $url = $input.'/.env';
@@ -24,37 +24,55 @@ function getHttpcode($url){
 	curl_close($ch);
 	return $httpcode;
 }
-
-// var_dump($listUrl[0]);
-
-if ($listUrl[0] == "200") {
-	echo "<p>.env exposed</p>";
-	echo '<a target="_blank" href="'.$url.'">'.$url.'</a><br>';
-	echo "===========================================";
-}
-else if ($listUrl[0] != "200") {
-	echo "<p>.env not exposed</p><br>";
-	echo "===========================================";
-}
-
-if ($listUrl[1] == "200") {
-	echo "<p>Logs exposed</p>";
-	echo '<a target="_blank" href="'.$url2.'">'.$url2.'</a><br>';
-	echo "===========================================";
-}
-else if ($listUrl[1] != "200") {
-	echo "<p>Logs file not exposed</p><br>";
-	echo "===========================================";
-}
-
-if ($listUrl[2] == "405") {
-	echo '<p>Debug mode enabled</p>';
-	echo '<a target="_blank" href="'.$url3.'">'.$url3.'</a><br>';
-	echo "===========================================";
-}
-else if ($listUrl[2] != "405") {
-	echo "<p>Debug mode in ".$input." disabled</p><br>";
-	echo "===========================================";
-}
-
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Result Laravel</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		a {
+			font-size: 1.25em;
+		}
+		h1 {
+			margin: 25px 0px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+	<h1 class="text-center">Results</h1>
+	<h5>.env File</h5>
+	<?php
+		if ($listUrl[0] == "200") {
+			echo "<p>.env exposed</p>";
+			echo '<a target="_blank" href="'.$url.'">'.$url.'</a><br>';
+		}
+		else if ($listUrl[0] != "200") {
+			echo "<p>.env not exposed</p><br>";
+		}
+	?>
+	<h5>Logs file</h5>
+	<?php
+		if ($listUrl[1] == "200") {
+			echo "<p>Logs exposed</p>";
+			echo '<a target="_blank" href="'.$url2.'">'.$url2.'</a><br>';
+		}
+		else if ($listUrl[1] != "200") {
+			echo "<p>Logs file not exposed</p><br>";
+		}
+	?>
+	<h5>Debug mode</h5>
+	<?php
+		if ($listUrl[2] == "405") {
+			echo '<p>Debug mode enabled</p>';
+			echo '<a target="_blank" href="'.$url3.'">'.$url3.'</a><br>';
+		}
+		else if ($listUrl[2] != "405") {
+			echo "<p>Debug mode in ".$input." disabled</p><br>";
+		}
+	?>

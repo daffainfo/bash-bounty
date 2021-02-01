@@ -1,2 +1,2 @@
 # BugBounty
-Tools for Bug Bounty
+Random tools for Bug Bounty
