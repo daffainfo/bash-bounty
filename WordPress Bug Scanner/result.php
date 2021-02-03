@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 	$nomer = 1;
-	$input = $_POST['wordpress'];
+	$input = addhttp($_POST['wordpress']);
 	
 	$url = $input.'/wp-json/wp/v2/users';
 	
@@ -29,21 +29,28 @@ error_reporting(0);
 	//xmlrpc
 	$url18 = $input.'/xmlrpc.php';
 
-	$output = file_get_contents($url);
-	$json = json_decode($output, true);
+	function addhttp($url) {
+		if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+			$url = "http://" . $url;
+		}
+		return $url;
+	}
 
 	function getHttpcode($url){
 	    $ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
 		curl_setopt($ch, CURLOPT_NOBODY, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-		curl_setopt($ch, CURLOPT_TIMEOUT,10);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		$output = curl_exec($ch);
 		$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		curl_close($ch);
 		return $httpcode;
-	}	
+	}
+
+	$output = file_get_contents($url);
+	$json = json_decode($output, true);
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,21 +62,21 @@ error_reporting(0);
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<style type="text/css">
 		a {
-			font-size: 1.25em;
+			font-size: 1em;
 			margin: 25px 0px;
 		}
-		h1 {
-			margin: 25px 0px;
+		h3 {
+			margin: 30px 0px;
 		}
 	</style>
 </head>
 <body>
 	<div class="container">
-		<h1>List WordPress Username</h1>
+		<h3>List WordPress Username</h3>
 		<table class="table table-bordered">
 			<tr>
-			<th>Nomer</th>
-			<th>Username Wordpress</th>
+				<th>Number</th>
+				<th>Username Wordpress</th>
 			<tr>
 			<?php
 				for($i=0; $i < count($json); $i++) {
@@ -80,68 +87,68 @@ error_reporting(0);
 				}
 			?>
 		</table>
-		<h1 class="border-top border-dark">Denial of Service load-scripts.php</h1>
+		<h3 class="border-top border-dark">Denial of Service load-scripts.php</h3>
 		<?php
 			if (getHttpcode($url2) == "200") {
-				echo '<a target="_blank" href="'.$url2.'">Check in here for full payload</a>';
+				echo '<a target="_blank" href="http://'.$url2.'">Check in here for full payload</a>';
 			} else {
-				echo "<h4>Not vuln</h4>";
+				echo "<h6>Not vuln</h6>";
 			}
 		?>
-		<h1 class="border-top border-dark">Denial of Service load-styles.php</h1>
+		<h3 class="border-top border-dark">Denial of Service load-styles.php</h3>
 		<?php
 			if (getHttpcode($url3) == "200") {
-				echo '<a target="_blank" href="'.$url3.'">Check in here for full payload</a>';
+				echo '<a target="_blank" href="http://'.$url3.'">Check in here for full payload</a>';
 			} else {
-				echo "<h4>Not vuln</h4>";
+				echo "<h6>Not vuln</h6>";
 			}
 		?>
-		<h1 class="border-top border-dark">Log files WordPress</h1>
+		<h3 class="border-top border-dark">Log files WordPress</h3>
 		<?php
 			if (getHttpcode($url4) == "200") {
-				echo '<a target="_blank" href="'.$url4.'">'.$url4.'</a>';
+				echo '<a target="_blank" href="http://'.$url4.'">'.$url4.'</a>';
 			} else {
-				echo "<h4>Not found</h4>";
+				echo "<h6>Not found</h6>";
 			}
 		?>
-		<h1 class="border-top border-dark">Backup file wp-config.php</h1>
+		<h3 class="border-top border-dark">Backup file wp-config.php</h3>
 		<?php
 			if (getHttpcode($url5) == "200") {
-				echo '<a target="_blank" href="'.$url5.'">'.$url5.'</a>';
+				echo '<a target="_blank" href="http://'.$url5.'">'.$url5.'</a>';
 			} else if (getHttpcode($url6) == "200") {
-				echo '<a target="_blank" href="'.$url6.'">'.$url6.'</a>';
+				echo '<a target="_blank" href="http://'.$url6.'">'.$url6.'</a>';
 			} else if (getHttpcode($url7) == "200") {
-				echo '<a target="_blank" href="'.$url7.'">'.$url7.'</a>';
+				echo '<a target="_blank" href="http://'.$url7.'">'.$url7.'</a>';
 			} else if (getHttpcode($url8) == "200") {
-				echo '<a target="_blank" href="'.$url8.'">'.$url8.'</a>';
+				echo '<a target="_blank" href="http://'.$url8.'">'.$url8.'</a>';
 			} else if (getHttpcode($url9) == "200") {
-				echo '<a target="_blank" href="'.$url9.'">'.$url9.'</a>';
+				echo '<a target="_blank" href="http://'.$url9.'">'.$url9.'</a>';
 			} else if (getHttpcode($url10) == "200") {
-				echo '<a target="_blank" href="'.$url10.'">'.$url10.'</a>';
+				echo '<a target="_blank" href="http://'.$url10.'">'.$url10.'</a>';
 			} else if (getHttpcode($url11) == "200") {
-				echo '<a target="_blank" href="'.$url11.'">'.$url11.'</a>';
+				echo '<a target="_blank" href="http://'.$url11.'">'.$url11.'</a>';
 			} else if (getHttpcode($url12) == "200") {
-				echo '<a target="_blank" href="'.$url12.'">'.$url12.'</a>';
+				echo '<a target="_blank" href="http://'.$url12.'">'.$url12.'</a>';
 			} else if (getHttpcode($url13) == "200") {
-				echo '<a target="_blank" href="'.$url13.'">'.$url13.'</a>';
+				echo '<a target="_blank" href="http://'.$url13.'">'.$url13.'</a>';
 			} else if (getHttpcode($url14) == "200") {
-				echo '<a target="_blank" href="'.$url14.'">'.$url14.'</a>';
+				echo '<a target="_blank" href="http://'.$url14.'">'.$url14.'</a>';
 			} else if (getHttpcode($url15) == "200") {
-				echo '<a target="_blank" href="'.$url15.'">'.$url15.'</a>';
+				echo '<a target="_blank" href="http://'.$url15.'">'.$url15.'</a>';
 			} else if (getHttpcode($url16) == "200") {
-				echo '<a target="_blank" href="'.$url16.'">'.$url16.'</a>';
+				echo '<a target="_blank" href="http://'.$url16.'">'.$url16.'</a>';
 			} else if (getHttpcode($url17) == "200") {
-				echo '<a target="_blank" href="'.$url17.'">'.$url17.'</a>';
+				echo '<a target="_blank" href="http://'.$url17.'">'.$url17.'</a>';
 			} else {
-				echo "<h4>Not found</h4>";
+				echo "<h6>Not found</h6>";
 			}
 		?>
-		<h1 class="border-top border-dark">XML-RPC WordPress</h1>
+		<h3 class="border-top border-dark">XML-RPC WordPress</h3>
 		<?php
 			if (getHttpcode($url18) == "405" || getHttpcode($url18) == "200") {
-				echo '<a target="_blank" href="'.$url18.'">'.$url18.'</a>';
+				echo '<a target="_blank" href="http://'.$url18.'">'.$url18.'</a>';
 			} else {
-				echo "<h4>Not vuln</h4>";
+				echo "<h6>Not vuln</h6>";
 			}
 		?>
 	</div>
