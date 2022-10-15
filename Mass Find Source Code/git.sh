@@ -1,5 +1,5 @@
 #!/bin/bash
-# .git Checker
+# .git Mass Scanner
  LISTS=$1
 
  if [[ ! -f ${LISTS} ]]; then
